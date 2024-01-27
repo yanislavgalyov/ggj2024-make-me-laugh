@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://cof6j2rgulhp6"]
+
+[ext_resource type="Script" path="res://scripts/dialogue.gd" id="1_nyv7f"]
+[ext_resource type="Texture2D" uid="uid://bk0n8a3k5t56e" path="res://assets/dialogue.png" id="2_wu6h6"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_nyv7f")
+data = "res://data/jester_lines.json"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -139.0
+offset_right = 174.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wu6h6")
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -20.0
+offset_right = 140.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_timer_timeout"]

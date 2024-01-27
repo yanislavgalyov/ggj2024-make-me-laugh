@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbfjpbjxstrls"]
+[gd_scene load_steps=10 format=3 uid="uid://bbfjpbjxstrls"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_cbhpv"]
 [ext_resource type="PackedScene" uid="uid://krtf81p5sowg" path="res://scenes/cannon.tscn" id="2_t68ex"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_8ny2k"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="4_f3rec"]
+[ext_resource type="PackedScene" uid="uid://c5ugl2pni8osj" path="res://scenes/jester.tscn" id="5_jch7d"]
 [ext_resource type="Shader" path="res://shaders/polygon.gdshader" id="7_6byww"]
 [ext_resource type="PackedScene" uid="uid://b47n5mc1ytgwl" path="res://scenes/rock.tscn" id="7_fcy1y"]
 
@@ -14,13 +15,13 @@ shader = ExtResource("7_6byww")
 
 [node name="001" type="Node2D"]
 script = ExtResource("1_cbhpv")
-force = 5000.0
 
-[node name="Cannon" parent="." instance=ExtResource("2_t68ex")]
+[node name="cannon" parent="." instance=ExtResource("2_t68ex")]
 position = Vector2(224, 546)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(224, 546)
+zoom = Vector2(0.5, 0.5)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("3_8ny2k")
@@ -30,9 +31,9 @@ position = Vector2(224, 546)
 script = ExtResource("4_f3rec")
 priority_override = false
 priority = 0
-zoom = Vector2(1, 1)
+zoom = Vector2(0.5, 0.5)
 follow_mode = 2
-follow_target = NodePath("../Cannon")
+follow_target = NodePath("../cannon")
 follow_parameters/target_offset = Vector2(0, 0)
 follow_parameters/damping = false
 frame_preview = true
@@ -48,6 +49,22 @@ tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
 
+[node name="Jester" parent="." instance=ExtResource("5_jch7d")]
+visible = false
+position = Vector2(429, 469)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="End" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_1x8mh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="End" groups=["Groaund"]]
+material = SubResource("ShaderMaterial_i02cg")
+polygon = PackedVector2Array(-60, 649, 610, 674, 902, 586, 1096, 855, 1588, 374, 1794, 901, 2114, 586, 2858, 676, 3092, 1022, 3621, 568, 3611, -662, 3898, -652, 3886, 1274, -348, 1195, -335, -581, -53, -548)
+
+[node name="Polygon2D" type="Polygon2D" parent="End"]
+polygon = PackedVector2Array(-60, 649, 610, 674, 902, 586, 1096, 855, 1588, 374, 1794, 901, 2114, 586, 2858, 676, 3092, 1022, 3621, 568, 3611, -662, 3898, -652, 3886, 1274, -348, 1195, -335, -581, -53, -548)
+
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Rock" parent="Obstacles" instance=ExtResource("7_fcy1y")]
@@ -59,16 +76,4 @@ position = Vector2(2924, 227)
 [node name="Rock3" parent="Obstacles" instance=ExtResource("7_fcy1y")]
 position = Vector2(1441, -231)
 
-[node name="Projectiles" type="Node2D" parent="."]
-
-[node name="End" type="StaticBody2D" parent="." groups=["Ground"]]
-physics_material_override = SubResource("PhysicsMaterial_1x8mh")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="End" groups=["Groaund"]]
-material = SubResource("ShaderMaterial_i02cg")
-polygon = PackedVector2Array(-60, 649, 610, 674, 902, 586, 1096, 855, 1588, 374, 1794, 901, 2114, 586, 2858, 676, 3092, 1022, 3621, 568, 3611, -662, 3898, -652, 3886, 1274, -348, 1195, -335, -581, -53, -548)
-
-[node name="Polygon2D" type="Polygon2D" parent="End"]
-polygon = PackedVector2Array(-60, 649, 610, 674, 902, 586, 1096, 855, 1588, 374, 1794, 901, 2114, 586, 2858, 676, 3092, 1022, 3621, 568, 3611, -662, 3898, -652, 3886, 1274, -348, 1195, -335, -581, -53, -548)
-
-[connection signal="fire_cannon_ball" from="Cannon" to="." method="_on_cannon_fire_cannon_ball"]
+[connection signal="fire_cannon_ball" from="cannon" to="." method="_on_cannon_fire_cannon_ball"]
