@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbfjpbjxstrls"]
+[gd_scene load_steps=13 format=3 uid="uid://bbfjpbjxstrls"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_cbhpv"]
 [ext_resource type="Texture2D" uid="uid://xjpiuakkp1dy" path="res://assets/parallax/parallax-00.png" id="2_b1pns"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dnyuqqt8tto24" path="res://assets/parallax/parallax-02.png" id="4_k27ro"]
 [ext_resource type="Texture2D" uid="uid://c7g0pht2477td" path="res://assets/parallax/parallax-03.png" id="5_keju2"]
 [ext_resource type="PackedScene" uid="uid://b47n5mc1ytgwl" path="res://scenes/rock.tscn" id="7_fcy1y"]
+[ext_resource type="PackedScene" uid="uid://bj6no7qxyy7gc" path="res://scenes/finish.tscn" id="11_1pfiu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1x8mh"]
 
@@ -96,6 +97,9 @@ position = Vector2(2579, 393)
 
 [node name="Rock3" parent="Obstacles" instance=ExtResource("7_fcy1y")]
 position = Vector2(3162, 311)
+
+[node name="Finish" parent="Obstacles" instance=ExtResource("11_1pfiu")]
+position = Vector2(1896, 489)
 
 [node name="Projectiles" type="Node2D" parent="."]
 

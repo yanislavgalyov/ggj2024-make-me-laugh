@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5ugl2pni8osj"]
+[gd_scene load_steps=5 format=3 uid="uid://c5ugl2pni8osj"]
 
 [ext_resource type="Script" path="res://scripts/jester.gd" id="1_muaio"]
 [ext_resource type="Texture2D" uid="uid://bxa45ijyir6n2" path="res://assets/jester/jester.png" id="2_rgpe8"]
+[ext_resource type="AudioStream" uid="uid://4vvc6lnyoyc2" path="res://sounds/aaa.wav" id="3_c7ypm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8kc4"]
 radius = 8.0
@@ -21,4 +22,5 @@ texture = ExtResource("2_rgpe8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b8kc4")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_c7ypm")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj6no7qxyy7gc"]
+
+[ext_resource type="Texture2D" uid="uid://bjryvkm8wpelr" path="res://assets/obstacles/floating_earth.png" id="1_gbeqh"]
+
+[node name="Finish" type="StaticBody2D" groups=["Finish"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gbeqh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-3, 0)
+polygon = PackedVector2Array(180, -26, 144, 60, 131, 87, 6, 172, -142, 63, -175, -25, -127, -26, -37, 14, 86, 3, 117, -35, 155, -44)

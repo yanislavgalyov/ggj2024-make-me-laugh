@@ -22,6 +22,9 @@ func _on_soft_body_stopped()-> void:
 func _on_jester_stopped()-> void:
     var spawn = dialogue_scene.instantiate()
     $Projectiles.add_child(spawn)
+    
+func _on_jester_has_finished()-> void:
+    TransitionLayer.change_scene(get_tree().current_scene.scene_file_path)
 
 func _on_cannon_fire_cannon_ball(pos: Vector2, angel_deg: float)-> void:
     create_jester_and_fire(pos, angel_deg, false)
@@ -45,6 +48,7 @@ func create_jester_and_fire(pos: Vector2, angel_deg: float, is_soft: bool)-> voi
         spawn.position = pos
         $Projectiles.add_child(spawn)
         spawn.connect("jester_stopped", _on_jester_stopped)
+        spawn.connect("jester_has_finished", _on_jester_has_finished)
         $PhantomCamera2D.set_follow_target_node(spawn)
 
         var angle_rad: float = deg_to_rad(angel_deg)
