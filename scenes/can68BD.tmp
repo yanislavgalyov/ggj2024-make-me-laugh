@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://krtf81p5sowg"]
+
+[ext_resource type="Script" path="res://scenes/cannon.gd" id="1_671mn"]
+[ext_resource type="Texture2D" uid="uid://nrd8yahem714" path="res://art/cannon_base.png" id="1_mdddi"]
+[ext_resource type="Texture2D" uid="uid://ducgl5iyxej4r" path="res://art/cannon.png" id="1_xm1pf"]
+
+[node name="cannon" type="Node2D"]
+position = Vector2(249, 335)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_671mn")
+
+[node name="Cannon" type="Sprite2D" parent="."]
+position = Vector2(235, 184)
+texture = ExtResource("1_xm1pf")
+
+[node name="CannonBase" type="Sprite2D" parent="."]
+position = Vector2(382, 451)
+texture = ExtResource("1_mdddi")

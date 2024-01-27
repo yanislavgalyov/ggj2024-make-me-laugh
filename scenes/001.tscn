@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbfjpbjxstrls"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_cbhpv"]
+[ext_resource type="PackedScene" uid="uid://krtf81p5sowg" path="res://scenes/cannon.tscn" id="2_t68ex"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_8ny2k"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="4_f3rec"]
+[ext_resource type="PackedScene" uid="uid://c5ugl2pni8osj" path="res://scenes/jester.tscn" id="5_jch7d"]
+[ext_resource type="PackedScene" uid="uid://b47n5mc1ytgwl" path="res://scenes/rock.tscn" id="7_fcy1y"]
+
+[node name="001" type="Node2D"]
+script = ExtResource("1_cbhpv")
+
+[node name="cannon" parent="." instance=ExtResource("2_t68ex")]
+position = Vector2(224, 546)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2(429, 469)
+zoom = Vector2(0.5, 0.5)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("3_8ny2k")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(429, 469)
+script = ExtResource("4_f3rec")
+priority_override = false
+priority = 0
+zoom = Vector2(0.5, 0.5)
+follow_mode = 2
+follow_target = NodePath("")
+follow_parameters/target_offset = Vector2(0, 0)
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="Jester" parent="." instance=ExtResource("5_jch7d")]
+visible = false
+position = Vector2(429, 469)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Rock" parent="." instance=ExtResource("7_fcy1y")]
+position = Vector2(708, 270)
+
+[node name="End" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="End"]
+polygon = PackedVector2Array(-12, 242, -21, 820, 3075, 813, 3077, -590, 3051, 762, -3, 759, 6, -327)
+
+[connection signal="fire_cannon_ball" from="cannon" to="." method="_on_cannon_fire_cannon_ball"]

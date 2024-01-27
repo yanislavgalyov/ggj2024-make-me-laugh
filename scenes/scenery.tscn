@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://ot75byws3jf2"]
+
+[ext_resource type="Texture2D" uid="uid://xjpiuakkp1dy" path="res://assets/parallax/parallax-00.png" id="1_v6gyw"]
+[ext_resource type="Texture2D" uid="uid://clw10swqnvjgj" path="res://assets/parallax/parallax-01.png" id="2_yxlqc"]
+[ext_resource type="Texture2D" uid="uid://dnyuqqt8tto24" path="res://assets/parallax/parallax-02.png" id="3_mt5j5"]
+[ext_resource type="Texture2D" uid="uid://c7g0pht2477td" path="res://assets/parallax/parallax-03.png" id="4_gsfe6"]
+
+[sub_resource type="GDScript" id="GDScript_syop1"]
+script/source = "extends ParallaxLayer
+
+
+@export var CLOUD_SPEED : float = -15.0
+# Called when the node enters the scene tree for the first time.
+func _ready():
+    pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta) -> void:
+    self.motion_offset.x += CLOUD_SPEED * delta
+"
+
+[node name="Scenery" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(0, 300)
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 300)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_v6gyw")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1440, 0)
+script = SubResource("GDScript_syop1")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("2_yxlqc")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("3_mt5j5")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0)
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(1, 0)
+texture = ExtResource("4_gsfe6")

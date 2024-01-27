@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b47n5mc1ytgwl"]
+
+[ext_resource type="Texture2D" uid="uid://by281hx6t1mhm" path="res://assets/floating_rock.png" id="1_k8ytr"]
+[ext_resource type="Script" path="res://scripts/rock.gd" id="1_rmkem"]
+
+[node name="Rock" type="StaticBody2D"]
+script = ExtResource("1_rmkem")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k8ytr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-127, 120, -55, 146, -37, 138, -21, 157, 35, 158, 73, 147, 81, 123, 107, 121, 137, 79, 132, 66, 146, 48, 143, 23, 134, -16, 108, -27, 40, -26, 13, -3, -9, 24, -62, 21, -118, 2, -168, 23, -175, 67, -146, 97)
