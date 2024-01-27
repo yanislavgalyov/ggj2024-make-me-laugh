@@ -1,20 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5ugl2pni8osj"]
 
-[ext_resource type="Texture2D" uid="uid://crrqwdeq0ljh6" path="res://assets/jester.png" id="1_58hg3"]
 [ext_resource type="Script" path="res://scripts/jester.gd" id="1_muaio"]
+[ext_resource type="Texture2D" uid="uid://bxa45ijyir6n2" path="res://assets/jester/jester.png" id="2_rgpe8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8kc4"]
-radius = 16.0
-height = 66.0
+radius = 8.0
+height = 24.0
 
 [node name="Jester" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 5
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_muaio")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-5, -6)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_58hg3")
+texture = ExtResource("2_rgpe8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, -6)
 shape = SubResource("CapsuleShape2D_b8kc4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

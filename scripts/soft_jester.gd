@@ -3,7 +3,7 @@ extends Node2D
 signal soft_body_stopped()
 
 @onready var soft: SoftBody2D = $Soft as SoftBody2D
-@onready var bone: RigidBody2D = get_node("Soft/Bone-0") as RigidBody2D
+@onready var bone: RigidBody2D = $"Soft/Bone-0"
 
 @onready var hasStopped: bool = false
 @onready var ground_ray: RayCast2D = $GroundRay
