@@ -4,7 +4,7 @@ extends Node2D
 
 var jester_scene: PackedScene = preload("res://scenes/jester.tscn")
 var soft_jester_scene: PackedScene = preload("res://scenes/soft_jester.tscn")
-
+var rock_scene: PackedScene = preload("res://scenes/rock.tscn")
 var dialogue_scene: PackedScene = preload("res://scenes/dialogue.tscn")
 
 @onready var follow_camera = $FollowCamera
@@ -12,6 +12,7 @@ var dialogue_scene: PackedScene = preload("res://scenes/dialogue.tscn")
 
 @onready var cannon = $Cannon
 @onready var projectiles = $Projectiles
+@onready var obstacles = $Obstacles
     
 func _process(_delta):
     if Input.is_action_just_pressed("Reset Camera"):
@@ -20,6 +21,10 @@ func _process(_delta):
         TransitionLayer.change_scene(get_tree().current_scene.scene_file_path)
     if Input.is_action_just_pressed("Quit"):
         TransitionLayer.change_scene("res://scenes/menu.tscn")
+    if Input.is_action_just_pressed("Spawn"):
+        var spawn = rock_scene.instantiate()
+        spawn.position = get_global_mouse_position()
+        obstacles.add_child(spawn)
         
 func switch_cameras():
     var follow_camera_priority: int = follow_camera.get_priority()
