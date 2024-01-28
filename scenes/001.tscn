@@ -65,7 +65,7 @@ texture = ExtResource("5_keju2")
 position = Vector2(224, 546)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(480, 300)
+position = Vector2(544, 300)
 limit_left = -96
 limit_top = -152
 limit_right = 3657
@@ -75,7 +75,7 @@ limit_bottom = 824
 script = ExtResource("3_8ny2k")
 
 [node name="FollowCamera" type="Node2D" parent="."]
-position = Vector2(288, 546)
+position = Vector2(330, 546)
 script = ExtResource("4_f3rec")
 priority_override = false
 priority = 1
@@ -128,7 +128,7 @@ position = Vector2(389, 300)
 script = ExtResource("12_xgxa1")
 
 [node name="FreeCamera" type="Node2D" parent="FreeMarker"]
-position = Vector2(91, 0)
+position = Vector2(155, 0)
 script = ExtResource("4_f3rec")
 priority_override = false
 priority = 10
