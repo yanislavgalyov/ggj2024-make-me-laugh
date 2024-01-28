@@ -19,7 +19,7 @@ func _process(_delta):
     if Input.is_action_just_pressed("Reload"):
         TransitionLayer.change_scene(get_tree().current_scene.scene_file_path)
     if Input.is_action_just_pressed("Quit"):
-        get_tree().quit()
+        TransitionLayer.change_scene("res://scenes/menu.tscn")
         
 func switch_cameras():
     var follow_camera_priority: int = follow_camera.get_priority()
