@@ -6,7 +6,7 @@ extends CanvasLayer
 func change_scene(target: String) -> void:
     loading_label.text = "Loading..."
     #$HTTPRequest.request("https://api.chucknorris.io/jokes/random")
-    $HTTPRequest.request("https://uselessfacts.jsph.pl/api/v2/facts/random")
+    #$HTTPRequest.request("https://uselessfacts.jsph.pl/api/v2/facts/random")
 
     $AnimationPlayer.play("fade_to_black")
     await $AnimationPlayer.animation_finished
@@ -18,6 +18,7 @@ func change_scene(target: String) -> void:
 
 
 func _on_http_request_request_completed(result, response_code, headers, body):
-    var json = JSON.parse_string(body.get_string_from_utf8())
-    #fun_fact_label.text = json["value"]
-    fun_fact_label.text = json["text"]
+    pass
+    #var json = JSON.parse_string(body.get_string_from_utf8())
+    ##fun_fact_label.text = json["value"]
+    #fun_fact_label.text = json["text"]

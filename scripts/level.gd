@@ -49,11 +49,12 @@ func _on_soft_body_stopped()-> void:
     var spawn = dialogue_scene.instantiate()
     projectiles.add_child(spawn)
     
-func _on_jester_stopped()-> void:
+func _on_jester_stopped(jester_position: Vector2)-> void:
     var spawn = dialogue_scene.instantiate()
+    spawn.set_global_position_anchor(jester_position)
     projectiles.add_child(spawn)
-    
-func _on_jester_has_finished()-> void:
+
+func _on_jester_has_finished(_jester_position: Vector2)-> void:
     TransitionLayer.change_scene(get_tree().current_scene.scene_file_path)
 
 func _on_cannon_fire_cannon_ball(pos: Vector2, angel_deg: float, duration: float)-> void:

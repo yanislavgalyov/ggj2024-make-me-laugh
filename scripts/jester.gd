@@ -1,7 +1,7 @@
 extends RigidBody2D
    
-signal jester_stopped()
-signal jester_has_finished()
+signal jester_stopped(jester_position: Vector2)
+signal jester_has_finished(jester_position: Vector2)
      
 @onready var hasStopped: bool = false
 
@@ -21,9 +21,9 @@ func _integrate_forces(state):
                 var collider = state.get_contact_collider_object (i)
                 if collider and collider is Node and collider.is_in_group("Ground"):
                     hasStopped = true
-                    jester_stopped.emit()
+                    jester_stopped.emit(global_position)
                     break
                 if collider and collider is Node and collider.is_in_group("Finish"):
                     hasStopped = true
-                    jester_has_finished.emit()
+                    jester_has_finished.emit(global_position)
                     break
