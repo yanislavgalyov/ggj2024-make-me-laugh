@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbfjpbjxstrls"]
+[gd_scene load_steps=15 format=3 uid="uid://bbfjpbjxstrls"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_cbhpv"]
 [ext_resource type="Texture2D" uid="uid://xjpiuakkp1dy" path="res://assets/parallax/parallax-00.png" id="2_b1pns"]
@@ -11,8 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://c7g0pht2477td" path="res://assets/parallax/parallax-03.png" id="5_keju2"]
 [ext_resource type="PackedScene" uid="uid://b47n5mc1ytgwl" path="res://scenes/rock.tscn" id="7_fcy1y"]
 [ext_resource type="PackedScene" uid="uid://bj6no7qxyy7gc" path="res://scenes/finish.tscn" id="11_1pfiu"]
+[ext_resource type="Script" path="res://scripts/movement.gd" id="12_xgxa1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1x8mh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe86t"]
+size = Vector2(3752.5, 1098)
 
 [node name="001" type="Node2D"]
 script = ExtResource("1_cbhpv")
@@ -22,6 +26,7 @@ force = 2000.0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-317, 32)
+motion_scale = Vector2(0, 1)
 motion_mirroring = Vector2(2880, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
@@ -30,6 +35,7 @@ texture = ExtResource("2_b1pns")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-317, 32)
+motion_scale = Vector2(0, 1)
 motion_mirroring = Vector2(2880, 0)
 script = ExtResource("3_kqipr")
 
@@ -59,17 +65,20 @@ texture = ExtResource("5_keju2")
 position = Vector2(224, 546)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(224, 546)
-zoom = Vector2(1.5, 1.5)
+position = Vector2(480, 329)
+limit_left = -96
+limit_top = 5
+limit_right = 3657
+limit_bottom = 770
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("3_8ny2k")
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-position = Vector2(224, 546)
+[node name="FollowCamera" type="Node2D" parent="."]
+position = Vector2(288, 546)
 script = ExtResource("4_f3rec")
 priority_override = false
-priority = 0
+priority = 1
 zoom = Vector2(1.5, 1.5)
 follow_mode = 1
 follow_target = NodePath("../Cannon")
@@ -77,11 +86,8 @@ follow_parameters/damping = false
 frame_preview = true
 pixel_perfect = true
 limit/draw_limits = true
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/limit_node_target = NodePath("")
+limit/limit_node_target = NodePath("../CameraLimit")
+limit/margin = Vector4i(0, 0, 0, 0)
 limit/smoothed = false
 tween_parameters = null
 tween_on_load = true
@@ -112,5 +118,33 @@ polygon = PackedVector2Array(-75, 631, 198, 593, 249, 592, 621, 651, 902, 586, 1
 [node name="Polygon2D" type="Polygon2D" parent="End"]
 color = Color(0, 0.517647, 0.52549, 1)
 polygon = PackedVector2Array(-75, 631, 198, 593, 249, 592, 621, 651, 902, 586, 1161, 652, 1557, 494, 1901, 713, 2114, 586, 2858, 676, 3173, 664, 3621, 568, 3638, 36, -50, 7, -52, -150, 3704, -74, 3743, 785, -168, 743, -144, -31, -84, -121)
+
+[node name="CameraLimit" type="CollisionShape2D" parent="."]
+position = Vector2(1780.75, 397)
+shape = SubResource("RectangleShape2D_qe86t")
+
+[node name="FreeMarker" type="Marker2D" parent="."]
+position = Vector2(389, 300)
+script = ExtResource("12_xgxa1")
+
+[node name="FreeCamera" type="Node2D" parent="FreeMarker"]
+position = Vector2(91, 29)
+script = ExtResource("4_f3rec")
+priority_override = false
+priority = 10
+zoom = Vector2(1, 1)
+follow_mode = 2
+follow_target = NodePath("..")
+follow_parameters/target_offset = Vector2(0, 0)
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/limit_node_target = NodePath("../../CameraLimit")
+limit/margin = Vector4i(0, 0, 0, 0)
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
 
 [connection signal="fire_cannon_ball" from="Cannon" to="." method="_on_cannon_fire_cannon_ball"]
