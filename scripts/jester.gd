@@ -9,7 +9,9 @@ func _ready():
     $Audio.play()
 
 func _process(_delta):
-    pass
+    if global_position.x > 5000 or global_position.x < -1000 or global_position.y > 2000:
+        queue_free()
+
         
 func _integrate_forces(state):
     if !hasStopped:
