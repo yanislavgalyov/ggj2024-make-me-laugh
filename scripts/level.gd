@@ -56,10 +56,10 @@ func _on_jester_stopped()-> void:
 func _on_jester_has_finished()-> void:
     TransitionLayer.change_scene(get_tree().current_scene.scene_file_path)
 
-func _on_cannon_fire_cannon_ball(pos: Vector2, angel_deg: float)-> void:
-    create_jester_and_fire(pos, angel_deg, false)
+func _on_cannon_fire_cannon_ball(pos: Vector2, angel_deg: float, duration: float)-> void:
+    create_jester_and_fire(pos, angel_deg, duration, false)
 
-func create_jester_and_fire(pos: Vector2, angel_deg: float, is_soft: bool)-> void:
+func create_jester_and_fire(pos: Vector2, angel_deg: float, duration: float, is_soft: bool)-> void:
     if is_soft:
         var spawn = soft_jester_scene.instantiate()
         spawn.position = pos
@@ -70,7 +70,7 @@ func create_jester_and_fire(pos: Vector2, angel_deg: float, is_soft: bool)-> voi
         
         var angle_rad: float = deg_to_rad(angel_deg)
         var direction: Vector2 = Vector2(cos(angle_rad), sin(angle_rad))
-        var impulse: Vector2 = direction.normalized() * force
+        var impulse: Vector2 = direction.normalized() * force * duration
         
         soft.apply_impulse(impulse, Vector2.ZERO)
     else:
@@ -83,7 +83,7 @@ func create_jester_and_fire(pos: Vector2, angel_deg: float, is_soft: bool)-> voi
 
         var angle_rad: float = deg_to_rad(angel_deg)
         var direction: Vector2 = Vector2(cos(angle_rad), sin(angle_rad))
-        var impulse: Vector2 = direction.normalized() * force
+        var impulse: Vector2 = direction.normalized() * force * duration
         
         spawn.apply_impulse(impulse, Vector2.ZERO)
         
