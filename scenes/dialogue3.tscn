@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6vxil8ajv4f6"]
+
+[ext_resource type="Texture2D" uid="uid://bk0n8a3k5t56e" path="res://assets/dialogue.png" id="1_jyb3t"]
+[ext_resource type="Script" path="res://scripts/dialogue3.gd" id="2_o74h6"]
+
+[node name="Root" type="Node2D"]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -190.0
+offset_top = -117.0
+offset_right = -122.0
+offset_bottom = -63.0
+scale = Vector2(6.4, 2.08)
+texture = ExtResource("1_jyb3t")
+script = ExtResource("2_o74h6")
+data = "res://data/jester_lines.json"
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 10.0
+offset_right = 323.0
+offset_bottom = 75.0
+scale = Vector2(0.191391, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="NinePatchRect"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="NinePatchRect/Timer" to="NinePatchRect" method="_on_timer_timeout"]
