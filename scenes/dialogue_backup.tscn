@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqgxrpy8uwvty"]
+
+[ext_resource type="Texture2D" uid="uid://bk0n8a3k5t56e" path="res://assets/dialogue.png" id="2_grw2n"]
+
+[sub_resource type="GDScript" id="GDScript_5b8l5"]
+script/source = "extends CanvasLayer
+
+@export_file(\"*.json\") var data
+var lines: Array
+
+@onready var label = $NinePatchRect/Label
+
+func _ready():
+    var json_as_text = FileAccess.get_file_as_string(data)
+    lines = JSON.parse_string(json_as_text)
+    label.text = lines[randi()%len(lines)]
+
+
+#func _on_timer_timeout():
+    #queue_free()
+"
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = SubResource("GDScript_5b8l5")
+data = "res://data/jester_lines.json"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -78.0
+offset_right = 239.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_grw2n")
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -40.0
+offset_right = 140.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_timer_timeout"]

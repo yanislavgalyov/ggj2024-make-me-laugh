@@ -107,7 +107,7 @@ position = Vector2(3162, 311)
 [node name="Finish" parent="Obstacles" instance=ExtResource("11_1pfiu")]
 position = Vector2(1896, 489)
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="Projectiles" type="Node" parent="."]
 
 [node name="End" type="StaticBody2D" parent="." groups=["Ground"]]
 physics_material_override = SubResource("PhysicsMaterial_1x8mh")
@@ -147,6 +147,6 @@ tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
 
-[node name="Dialogues" type="Node2D" parent="."]
+[node name="Dialogues" type="Node" parent="."]
 
 [connection signal="fire_cannon_ball" from="Cannon" to="." method="_on_cannon_fire_cannon_ball"]
