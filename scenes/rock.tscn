@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://b47n5mc1ytgwl"]
+[gd_scene load_steps=5 format=3 uid="uid://b50kjwnnqwx1q"]
 
-[ext_resource type="Script" path="res://scripts/rock.gd" id="1_rmkem"]
-[ext_resource type="Shader" path="res://shaders/grass.gdshader" id="2_homdc"]
-[ext_resource type="Texture2D" uid="uid://cgpek0nnqpcsm" path="res://assets/obstacles/floating_rock.png" id="2_m5wrp"]
+[ext_resource type="Script" path="res://scripts/rock.gd" id="1_ivpmh"]
+[ext_resource type="Shader" path="res://shaders/grass.gdshader" id="2_jr48k"]
+[ext_resource type="Texture2D" uid="uid://cgpek0nnqpcsm" path="res://assets/obstacles/floating_rock.png" id="3_chsqr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7ptmh"]
-shader = ExtResource("2_homdc")
+shader = ExtResource("2_jr48k")
 
 [node name="Rock" type="StaticBody2D" groups=["Ground"]]
-script = ExtResource("1_rmkem")
+script = ExtResource("1_ivpmh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_7ptmh")
-texture = ExtResource("2_m5wrp")
+texture = ExtResource("3_chsqr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-119, 20, -114, 35, -107, 56, -82, 68, -51, 90, -15, 102, 26, 101, 48, 95, 50, 77, 68, 80, 82, 55, 91, 23, 85, -4, 37, -13, 13, -3, -9, 24, -62, 21, -118, 2)
